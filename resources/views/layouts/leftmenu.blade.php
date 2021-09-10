@@ -5,8 +5,9 @@
     $userDetail = $sessionData['userDetail'];
 
     //define parent menu here...
-    $purchaseOrderParentMenu = array('create_po', 'approve_po', 'ongoing_po');
     $systemSettingParentMenu = array('privilege_setting', 'user_privilege_setting');
+    $drillingParrentMenu     = array('initiate_drilling');
+    $applicationSetting      = array('pit_setting', 'blok_setting', 'operator_setting', 'alatberat_setting');
 
 ?>
 <div class="sidebar">
@@ -35,47 +36,6 @@
         </li>
         <?php endif;?>
         <li class="nav-header">MENU</li>
-        
-        <?php 
-        if(count(array_intersect($purchaseOrderParentMenu, $privilege)) > 0):
-        ?>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>
-                Purchase Orders
-                <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-                <ul class="nav nav-treeview">
-                    <?php if(in_array('create_po', $privilege)):?>
-                        <li class="nav-item">
-                        <a href="pages/forms/general.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Create PO</p>
-                        </a>
-                        </li>
-                    <?php endif;?>
-                    
-                    <?php if(in_array('ongoing_po', $privilege)):?>
-                        <li class="nav-item">
-                        <a href="pages/forms/advanced.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>List On Going PO</p>
-                        </a>
-                        </li>
-                    <?php endif; ?>
-                    <?php if(in_array('approve_po', $privilege)):?>
-                    <li class="nav-item">
-                    <a href="pages/forms/editors.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Waiting Approval</p>
-                    </a>
-                    </li>
-                    <?php endif;?>
-                </ul>
-        </li>
-        <?php endif;?>
 
         
         <?php 
@@ -108,6 +68,91 @@
             </a>
             </li>
             <?php endif; ?>
+        </ul>
+        </li>
+
+        <?php 
+        endif;
+        ?>
+
+        <?php 
+        if(count(array_intersect($drillingParrentMenu, $privilege)) > 0):
+        ?>
+        <li class="nav-item <?php echo (!empty($menuInfo['parentMenu'])) ? ($menuInfo['parentMenu'] == 'System Setting') ? 'menu-is-opening menu-open' : '' : ''; ?> ">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cog"></i>
+            <p>
+            Drilling
+            <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            
+            <?php if(in_array('initiate_drilling', $privilege)):?>
+            <li class="nav-item">
+            <a href="/privilege/setting" class="nav-link <?php echo (!empty($menuInfo['childMenu'])) ? ($menuInfo['childMenu'] ==  'Privilege Setting') ? 'active' : '': ''; ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Initiate Drilling</p>
+            </a>
+            </li>
+            <?php endif;?>
+        </ul>
+        </li>
+
+        <?php 
+        endif;
+        ?>
+
+        <?php 
+        if(count(array_intersect($applicationSetting, $privilege)) > 0):
+        ?>
+        <li class="nav-item <?php echo (!empty($menuInfo['parentMenu'])) ? ($menuInfo['parentMenu'] == 'Application Setting') ? 'menu-is-opening menu-open' : '' : ''; ?> ">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cog"></i>
+            <p>
+            Application Setting
+            <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            
+            <?php if(in_array('pit_setting', $privilege)):?>
+            <li class="nav-item">
+            <a href="/privilege/setting" class="nav-link <?php echo (!empty($menuInfo['childMenu'])) ? ($menuInfo['childMenu'] ==  'Pit') ? 'active' : '': ''; ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pit</p>
+            </a>
+            </li>
+            <?php endif;?>
+
+            <?php if(in_array('blok_setting', $privilege)):?>
+            <li class="nav-item">
+            <a href="/privilege/setting" class="nav-link <?php echo (!empty($menuInfo['childMenu'])) ? ($menuInfo['childMenu'] ==  'Blok') ? 'active' : '': ''; ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Blok</p>
+            </a>
+            </li>
+            <?php endif;?>
+
+            <?php if(in_array('operator_setting', $privilege)):?>
+            <li class="nav-item">
+            <a href="/privilege/setting" class="nav-link <?php echo (!empty($menuInfo['childMenu'])) ? ($menuInfo['childMenu'] ==  'Operator') ? 'active' : '': ''; ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Operator</p>
+            </a>
+            </li>
+            <?php endif;?>
+            
+
+            <?php if(in_array('alatberat_setting', $privilege)):?>
+            <li class="nav-item">
+            <a href="/privilege/setting" class="nav-link <?php echo (!empty($menuInfo['childMenu'])) ? ($menuInfo['childMenu'] ==  'Alat Berat') ? 'active' : '': ''; ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Alat Berat</p>
+            </a>
+            </li>
+            <?php endif;?>
+
         </ul>
         </li>
 

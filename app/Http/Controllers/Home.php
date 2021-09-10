@@ -40,6 +40,7 @@ class Home extends Controller
 
         $updatePassword = $this->updatePassword($userName, $postData['newPassword']);
 
+        return redirect('logout');
     }
 
     private function updatePassword($userName, $password){
@@ -47,7 +48,8 @@ class Home extends Controller
         
         DB::table('m_user_account')
                 ->where('USER_NAME', $userName)
-                ->update(['PASSWORD' => $hashPassword]);
+                ->update(['PASSWORD' => $hashPassword,
+                          'IS_FIRST_LOGIN' => 'N']);
 
     }
 
