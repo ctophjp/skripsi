@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in</title>
+  <title>Mining MIS | Log in</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,17 +16,26 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <b>Inventory</b> System
+    <b>Mining MI</b> System
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
+      
+      <?php if(!empty($errorCode)):?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?php echo $errorMsg; ?> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <?php endif;?>
 
       <form action="userlogin" method="post">
           @csrf
         <div class="input-group mb-3">
-          <input type="text" name="username" class="form-control" placeholder="Username">
+          <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo !empty($loginData['username']) ? $loginData['username'] : ''; ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>

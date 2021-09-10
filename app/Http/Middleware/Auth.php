@@ -9,14 +9,20 @@ class Auth extends Middleware
 {
     public function handle($request, Closure $next)
     {
-        // if (! $request->expectsJson()) {
-        //     return route('login');
-        // }
-        $usernameSession = $request->session()->get('userName');
-        if(empty($usernameSession)){
+        $userdataSession = $request->session()->get('userData');
+        
+        if(empty($userdataSession)){
             return redirect('login');
+        }else{
+            if($userdataSession['userDetail']->IS_FIRST_LOGIN == 'N'){
+                return $next($request);
+            }else{
+                if($request->path() == 'home/changepassword'){
+                    return $next($request);
+                }else{
+                    return redirect('home/changepassword');
+                }
+            }
         }
-
-        return $next($request);
     }
 }
